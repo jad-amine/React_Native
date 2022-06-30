@@ -1,32 +1,48 @@
-import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
-import {} from "react-native-web";
+import { useEffect, useState } from "react";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Form from "./components/Form";
+
+// Components
+import Header from "./components/Header";
 
 export default function App() {
-  const [name, setName] = useState("jad");
-  const [age, setAge] = useState(35);
-
-  const persons = [
-    "jad",
-    "joseph",
-    "john",
-    "dada",
-    "joseph",
-    "john",
-    "joseph",
-    "john",
-  ];
+  const [todos, setTodos] = useState([
+    { text: "buy coffe", key: "1" },
+    { text: "create app", key: "2" },
+    { text: "clean the room", key: "3" },
+  ]);
+  const [number, setNumber] = useState(0);
+  useEffect(() => {
+    setNumber(todos.length);
+  }, []);
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {persons.map((person) => (
-          <View>
-            <Text style={styles.item}>{person}</Text>
-          </View>
-        ))}
-      </ScrollView>
+      <Header />
+      <View style={styles.content}>
+        <Form
+          setTodos={setTodos}
+          todos={todos}
+          setNumber={setNumber}
+          number={number}
+        />
+        <View style={styles.list}>
+          <FlatList
+            data={todos}
+            renderItem={({ item }) => (
+              <TouchableOpacity>
+                <Text>{item.text}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -35,13 +51,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 20,
-    paddingTop: 30,
   },
-  item: {
-    backgroundColor: "grey",
-    marginTop: 24,
-    padding: 30,
-    fontSize: 24,
+  content: {
+    padding: 40,
+  },
+  list: {
+    marginTop: 20,
   },
 });
