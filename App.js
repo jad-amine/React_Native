@@ -1,33 +1,32 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 import {} from "react-native-web";
 
 export default function App() {
   const [name, setName] = useState("jad");
   const [age, setAge] = useState(35);
 
+  const persons = [
+    "jad",
+    "joseph",
+    "john",
+    "dada",
+    "joseph",
+    "john",
+    "joseph",
+    "john",
+  ];
+
   return (
     <View style={styles.container}>
-      <Text>Enter name:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g. John Doe"
-        onChangeText={(val) => setName(val)}
-      />
-
-      <Text>Enter age:</Text>
-      <TextInput
-        multiline
-        keyboardType="numeric"
-        style={styles.input}
-        placeholder="e.g. 99"
-        onChangeText={(val) => setAge(val)}
-      />
-
-      <Text>
-        name: {name}, age: {age}
-      </Text>
+      <ScrollView>
+        {persons.map((person) => (
+          <View>
+            <Text style={styles.item}>{person}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -36,14 +35,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingHorizontal: 20,
+    paddingTop: 30,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: "#777",
-    padding: 8,
-    margin: 10,
-    width: 200,
+  item: {
+    backgroundColor: "grey",
+    marginTop: 24,
+    padding: 30,
+    fontSize: 24,
   },
 });
