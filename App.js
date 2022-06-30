@@ -10,6 +10,7 @@ import Form from "./components/Form";
 
 // Components
 import Header from "./components/Header";
+import TodoItem from "./components/TodoItem";
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -17,28 +18,28 @@ export default function App() {
     { text: "create app", key: "2" },
     { text: "clean the room", key: "3" },
   ]);
-  const [number, setNumber] = useState(0);
-  useEffect(() => {
-    setNumber(todos.length);
-  }, []);
+
+  const pressHandler = (key) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.key != key);
+    });
+  };
 
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        <Form
+        {/* <Form
           setTodos={setTodos}
           todos={todos}
           setNumber={setNumber}
           number={number}
-        />
+        /> */}
         <View style={styles.list}>
           <FlatList
             data={todos}
             renderItem={({ item }) => (
-              <TouchableOpacity>
-                <Text>{item.text}</Text>
-              </TouchableOpacity>
+              <TodoItem pressHandler={pressHandler} item={item} />
             )}
           />
         </View>
