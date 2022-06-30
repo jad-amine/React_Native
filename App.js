@@ -1,17 +1,33 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {} from "react-native-web";
 
 export default function App() {
+  const [name, setName] = useState("jad");
+  const [age, setAge] = useState(35);
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.boldText}>Hello World</Text>
-      </View>
-      <View style={styles.body}>
-        <Text style={styles.boldText}>Lorem ipsum dolor sit amet</Text>
-        <Text>Lorem ipsum dolor sit amet</Text>
-        <Text>Lorem ipsum dolor sit amet</Text>
-      </View>
+      <Text>Enter name:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="e.g. John Doe"
+        onChangeText={(val) => setName(val)}
+      />
+
+      <Text>Enter age:</Text>
+      <TextInput
+        multiline
+        keyboardType="numeric"
+        style={styles.input}
+        placeholder="e.g. 99"
+        onChangeText={(val) => setAge(val)}
+      />
+
+      <Text>
+        name: {name}, age: {age}
+      </Text>
     </View>
   );
 }
@@ -23,15 +39,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  header: {
-    backgroundColor: "pink",
-    padding: 20,
-  },
-  boldText: {
-    fontWeight: "bold",
-  },
-  body: {
-    backgroundColor: "yellow",
-    padding: 20,
+  input: {
+    borderWidth: 1,
+    borderColor: "#777",
+    padding: 8,
+    margin: 10,
+    width: 200,
   },
 });
