@@ -19,7 +19,8 @@ export default function App() {
   const [todos, setTodos] = useState([
     { text: "buy coffee", key: "1" },
     { text: "create app", key: "2" },
-    { text: "clean the room", key: "3" },
+    { text: "go to the gym", key: "3" },
+    { text: "learn spanish", key: "4" },
   ]);
 
   const pressHandler = (key) => {
@@ -71,8 +72,10 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 40,
+    flex: 1,
   },
   list: {
     marginTop: 20,
+    flex: 1,
   },
 });
